@@ -15,7 +15,7 @@ func (h Handler) userRegister(c *echo.Context) error {
 	}
 
 	if fieldErros, err := h.userValidator.ValidateRegisterRequest(req); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"message": fieldErros})
+		return c.JSON(http.StatusBadRequest, map[string]string{"errors": fieldErros})
 	}
 
 	resp, err := h.userSvc.Register(c.Request().Context(), req)

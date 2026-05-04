@@ -1,7 +1,9 @@
 package validator
 
-type Repository interface{
+import "context"
 
+type Repository interface {
+	DoesUserExistByEmail(ctx context.Context, email string) (bool, error)
 }
 
 type Validator struct {
