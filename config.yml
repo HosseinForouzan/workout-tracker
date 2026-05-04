@@ -1,0 +1,8 @@
+type: yml
+
+psql:
+  port: 5431
+  host: localhost
+  db_name: workout_db
+  username: myuser
+  password: secret
