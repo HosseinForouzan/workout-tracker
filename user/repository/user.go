@@ -48,3 +48,15 @@ func (d *DB) GetUserByEmail(ctx context.Context, email string) (entity.User, err
 
 	return user, nil
 }
+
+func (d *DB) GetUserByID(ctx context.Context, userID uint) (entity.User, error) {
+	var user entity.User
+	query := `SELECT id, name, email, password FROM users WHERE id = $1`
+	err := d.conn.Conn().QueryRow(ctx, query, userID).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
+
+	if err != nil {
+		return entity.User{}, fmt.Errorf("can't get user by id: %w", err)
+	}
+
+	return user, nil
+}

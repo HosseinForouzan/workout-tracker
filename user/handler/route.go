@@ -14,4 +14,5 @@ func (h Handler) SetRoutes(e *echo.Echo) {
 
 	userGroup.POST("/register", h.userRegister)
 	userGroup.POST("/login", h.userLogin)
+	userGroup.GET("/profile/:id", h.userProfile)
 }
