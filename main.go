@@ -1,24 +1,32 @@
 package main
 
 import (
-	"fmt"
 
 	"github.com/HosseinForouzan/workout-tracker.git/config"
 	"github.com/HosseinForouzan/workout-tracker.git/repository/psql"
+	"github.com/HosseinForouzan/workout-tracker.git/user/handler"
+	"github.com/HosseinForouzan/workout-tracker.git/user/repository"
+	"github.com/HosseinForouzan/workout-tracker.git/user/service"
+	"github.com/labstack/echo/v5"
 )
 
 func main() {
 
 	cfg := config.Load("config.yml")
-	// db := psql.New(psql.Config{
-	// 	Username: "myuser",
-	// 	Password: "secret",
-	// 	Port: 5431,
-	// 	Host: "localhost",
-	// 	DBName: "workout_db",
-	// })
 
-	db := psql.New(cfg.Psql)
+	psql := psql.New(cfg.Psql)
+	userPsql := repository.New(psql)
 
-	fmt.Println(db)
+	userSvc := service.New(userPsql)
+
+	e := echo.New()
+	
+	userHandler := handler.New(userSvc)
+	userHandler.SetRoutes(e)
+
+	if err := e.Start(":8080"); err != nil {
+		e.Logger.Error("failed to start server", "error", err)
+
+	}	
+
 }
