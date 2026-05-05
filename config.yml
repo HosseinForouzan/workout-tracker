@@ -6,3 +6,6 @@ psql:
   db_name: workout_db
   username: myuser
   password: secret
+
+auth:
+  sign_key: secret
