@@ -18,8 +18,20 @@ func (s Service) Login(ctx context.Context, req param.LoginRequest) (param.Login
 		return param.LoginResponse{}, fmt.Errorf("user credential is wrong")
 	}
 
+	accessToken, err := s.auth.CreateAccessToken(user)
+	if err != nil {
+		return param.LoginResponse{}, fmt.Errorf("unexpected error: %w", err)
+	}
+
+	refreshToken, err := s.auth.CreateAccessToken(user)
+	if err != nil {
+		return param.LoginResponse{}, fmt.Errorf("unexpected error: %w", err)
+	}
+
 	return param.LoginResponse{
 		Name: user.Name,
 		Email: user.Email,
+		AccessToken: accessToken,
+		RefreshToken: refreshToken,
 	}, nil
 }

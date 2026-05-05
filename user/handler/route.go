@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	mw "github.com/HosseinForouzan/workout-tracker.git/auth/authservice/middleware"
 	"github.com/labstack/echo/v5"
 )
 
@@ -14,5 +15,5 @@ func (h Handler) SetRoutes(e *echo.Echo) {
 
 	userGroup.POST("/register", h.userRegister)
 	userGroup.POST("/login", h.userLogin)
-	userGroup.GET("/profile/:id", h.userProfile)
+	userGroup.GET("/profile", h.userProfile, mw.Auth(h.authSvc, h.config.Auth ))
 }

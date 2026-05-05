@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 
+	"github.com/HosseinForouzan/workout-tracker.git/auth/authservice"
 	"github.com/HosseinForouzan/workout-tracker.git/user/entity"
 )
 
@@ -14,8 +15,9 @@ type Repository interface {
 
 type Service struct {
 	repo Repository
+	auth authservice.Service
 }
 
-func New(repo Repository) Service {
-	return Service{repo: repo}
+func New(repo Repository, auth authservice.Service) Service {
+	return Service{repo: repo, auth: auth}
 }
