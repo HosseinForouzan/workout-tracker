@@ -20,3 +20,22 @@ type PlansGetResponse struct {
 type PlansOfUserGetResponse struct {
 	WorkoutPlans []entity.WorkoutPlan
 }
+
+type PlanExerciseRequest struct {
+	PlanID uint `json:"plan_id"`
+	ExerciseID uint `json:"exercise_id"`
+	TargetSets uint `json:"target_sets"`
+	TargetReps uint `json:"target_reps"`
+	TargetWeight float64 `json:"target_weight"`
+	SortOrder uint `json:"sort_order"`
+}
+
+type PlanExerciseResponse struct {
+	ID uint `json:"id"`
+	PlanID uint `json:"plan_id"`
+	ExerciseID uint `json:"exercise_id"`
+	TargetSets uint `json:"target_sets"`
+	TargetReps uint `json:"target_reps"`
+	TargetWeight float64 `json:"target_weight"`
+	SortOrder uint `json:"sort_order"`
+}

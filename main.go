@@ -30,13 +30,14 @@ func main() {
 	userPsql := repository.New(psql)
 	exercisePsql := ex_repository.New(psql)
 	planPsql := plan_repository.New(psql)
+	planExerciseRepo := plan_repository.New(psql)
 
 	userValidator := validator.New(userPsql)
 
 	authSvc := authservice.New(cfg.Auth)
 	userSvc := service.New(userPsql, authSvc)
 	exerciseSvc := ex_service.New(exercisePsql)
-	planSvc := plan_service.New(planPsql)
+	planSvc := plan_service.New(planPsql, planExerciseRepo)
 
 
 

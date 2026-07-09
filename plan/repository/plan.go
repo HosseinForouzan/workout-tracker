@@ -56,3 +56,19 @@ func (d *DB) GetPlansOfUser(ctx context.Context, userID uint) ([]entity.WorkoutP
 
 	return plans, nil
 }
+
+
+func(d *DB) AddExercisePlan(ctx context.Context, p entity.PlanExercise) (entity.PlanExercise, error) {
+	var id uint
+	query := `INSERT INTO plan_exercises(plan_id, exercise_id, target_sets, target_reps, target_weight, sort_order)
+				VALUES($1, $2, $3, $4, $5, $6) RETURNING id`
+	err := d.conn.Conn().QueryRow(ctx, query, p.PlanID, p.ExerciseID, p.TargetSets, p.TargetReps, p.TargetWeight, p.Order).Scan(&id)
+	if err != nil {
+		return entity.PlanExercise{}, fmt.Errorf("can't insert into addexercise plan: %w", err)
+	}
+
+	p.ID = id
+
+	return p, nil
+
+}

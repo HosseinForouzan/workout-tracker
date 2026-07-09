@@ -20,3 +20,17 @@ func (h Handler) planAdd(c *echo.Context) error {
 
 	return c.JSON(http.StatusCreated, resp)
 }
+
+func (h Handler) planExerciseAdd(c *echo.Context) error {
+	var req param.PlanExerciseRequest
+	if err := c.Bind(&req); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	resp, err := h.planSvc.AddPlanExercise(c.Request().Context(), req)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusCreated, resp)
+}

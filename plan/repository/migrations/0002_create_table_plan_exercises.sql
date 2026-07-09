@@ -18,7 +18,12 @@ CREATE TABLE plan_exercises (
     CONSTRAINT fk_plan_exercises_plan
         FOREIGN KEY (plan_id)
         REFERENCES plans(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_plan_exercises_exercise
+        FOREIGN KEY (exercise_id)
+        REFERENCES exercises(id)
+
 );
 
 -- + migrate down

@@ -8,6 +8,8 @@ type WorkoutPlan struct {
 }
 
 type PlanExercise struct {
+    ID uint
+    PlanID uint
     ExerciseID   uint
     TargetSets   uint
     TargetReps   uint

@@ -9,5 +9,8 @@ func (h Handler) SetRoutes(e *echo.Echo) {
 	planGroup.GET("", h.getAll)
 	planGroup.GET("/:id", h.getUserPlans)
 
+	planGroup.POST("/exercises", h.planExerciseAdd)
+
+
 	
 }
