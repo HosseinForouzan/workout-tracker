@@ -11,7 +11,6 @@ func (h Handler) exerciseList(c *echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	print(resp)
 
 	return c.JSON(http.StatusOK, resp)
 	
